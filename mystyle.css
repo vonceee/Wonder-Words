@@ -87,7 +87,7 @@
 		text-shadow: none;
 	}
 	
-	/* !--container-- */
+	/* !--containers- */
 	.menuBox {
 		margin-left: 2vh;
 		margin-right: 2vh;
@@ -185,6 +185,10 @@
 		align-self: flex-start;
 	}
 	
+	#word-display {
+		font-size: 5vh;
+		text-align: center;
+	}
 	/* --contents inside the containers--! */
 	
 	/* !--animations-- */
@@ -334,7 +338,6 @@
 		margin: 0 auto;
 	}
 	
-
 	#reset-alert-content {
 		margin-top: 2px;
 	}
