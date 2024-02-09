@@ -8,7 +8,7 @@
     let clues = 3;
     let lettersRevealedByClues = [];
 	
-	/* !--clueModal-- */
+    /* !--clueModal-- */
 	
 	function showCluePopup() {
         // Add the "show" class to the overlay element
@@ -79,13 +79,12 @@
 	  });
 
 	  // If any overlay is visible, don't allow keyboard input
-	  if (isAnyOverlayVisible) {
+	  if (isAnyOverlayVisible  && event.key !== 'Enter') { // Disables ALL keyboard input except for ENTER
 		return;
 	  }
 
 	  // Convert the key to uppercase to match the case of the letters in the word
 	  var letter = event.key.toUpperCase();
-
 	  // Check if the key is an alphabetic character
 	  if (/^[A-Z]$/.test(letter)) {
 		// Find the button element that corresponds to the pressed key
@@ -96,6 +95,11 @@
 		  buttonElement.click();
 		}
 	  }
+      if (letter == 'ENTER') { // Function that accepts Enter and closes the popup
+        removeCustomAlert();
+        return false;
+      }
+      
 	});
 
     function createKeyboard() {
