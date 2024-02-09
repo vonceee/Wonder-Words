@@ -65,6 +65,24 @@
 	
 	/* !--keyboard-- */
 	document.addEventListener('keyup', function(event) {
+	  // Define the IDs of the overlays
+	  var overlayIds = ['clueModal', 'custom-alert-box', 'reset-alert-box'];
+
+	  // Check if any of the overlays are visible
+	  var isAnyOverlayVisible = overlayIds.some(function(id) {
+		var overlay = document.getElementById(id);
+		if (overlay) {
+		  var overlayStyle = window.getComputedStyle(overlay);
+		  return overlayStyle.display !== 'none';
+		}
+		return false;
+	  });
+
+	  // If any overlay is visible, don't allow keyboard input
+	  if (isAnyOverlayVisible) {
+		return;
+	  }
+
 	  // Convert the key to uppercase to match the case of the letters in the word
 	  var letter = event.key.toUpperCase();
 
@@ -80,7 +98,6 @@
 	  }
 	});
 
-
     function createKeyboard() {
         let keyboardDiv = document.getElementById("keyboard");
         keyboardDiv.innerHTML = "";
@@ -92,7 +109,7 @@
                 let button = document.createElement("button");
                 button.textContent = letter;
                 button.setAttribute('data-letter', letter);
-		if (guessedLetters.includes(letter)) {
+				if (guessedLetters.includes(letter)) {
                 button.disabled = true;
             }
                 if (lettersRevealedByClues.includes(letter)) {
@@ -265,7 +282,7 @@
             showCustomAlert(`Congratulations! You have finished the ${categories[currentRound]} round!`, startRound);
             playAudioById("completeRoundSound");
             currentRound++;
-	}
+        }
     }
 
     function resetQuestionsUsage() {
@@ -277,7 +294,7 @@
     }
 
     function updateDisplay() {
-		let display = `${currentQuestion}\n\n`;
+		let display = `${currentQuestion}<br><br>`;
 
 		for (let letter of currentWord) {
 			if (!isLetter(letter)) {
