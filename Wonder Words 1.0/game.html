@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="points.png">
+	<link rel="stylesheet" href="mystyle.css">
+
+    <title>Wonder Words</title>
+    <style>
+
+		
+		
+
+    </style>
+</head>
+<footer>Mendoza | Ranola | Sibucao | Marcos | De Francia</footer>
+<body>
+
+	<div class="menuBox">
+	
+		<div class="Panel">
+			<a id="backBtn" href="index.html"><img src="exit.png" title="Go Back"></a>
+		</div>
+		
+		<div class="Panel">
+			<div id="pointsIcon"><img src="points.png" title="Points"></div>
+			<div id="points" style="margin-left: 2vh;"></div>
+		</div>
+		
+		<div class="Panel" id="strikesPanel">
+			<div id="strikes"></div>
+			<div id="strikesIcon" title="Lives"></div>
+		</div>
+		
+		<div class="Panel-1">
+			<div id="clues"></div><br>
+			<div id="category"></div><br>
+			<div id="questions"></div><br>
+		</div>
+		
+		<button class="btn1" id="clueButton" onclick="showCluePopup()"><b>Use Clue</b></button>
+		
+		<div class="modal" id="clueModal">
+			<div class="modal-content">
+				<p>Please select a type of clue.<br><br><br></p>
+				<button class="btn1" onclick="useClue('consonant'), closeCluePopup()">Consonant</button>
+				<button class="btn1" onclick="useClue('vowel'), closeCluePopup()">Vowel</button>
+				<button class="btn1" onclick="closeCluePopup()">Cancel</button>
+			</div>
+		</div>
+		
+		<button id="playMusic"><b>Toggle Music</b></button>
+		
+		<button onclick="showResetConfirmationPopup()"><b>Reset Game</b></button>
+		
+	</div>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="menuBox1" id="word-display"></div>
+<div class="menuBox2" id="keyboard"></div>
+
+<div id="custom-alert-box" class="box">
+    <div id="custom-alert-content"></div>
+    <button class="btn1" id="custom-button" onclick="removeCustomAlert()">OK</button>
+</div>
+
+<div id="reset-alert-box">
+    <div id="reset-alert-content">Are you sure you want to reset the game? You will lose all your current progress.<br><br><br><br><br></div>
+    <button onclick="resetGame(), hideResetConfirmationPopup()">Yes</button>
+    <button onclick="hideResetConfirmationPopup()">Cancel</button>
+</div>
+
+<footer>Mendoza | Ranola | Sibucao | Marcos | De Francia</footer>
+
+<audio id="buttonPress" src="buttonPress.mp3"></audio>
+<audio id="backgroundMusic" src="gameBackground.mp3" autoplay loop></audio>
+<audio id="deathSound" src="death.mp3"></audio>
+<audio id="wrongLetterSound" src="damage.mp3"></audio>
+<audio id="correctLetterSound" src="correctLetter.mp3"></audio>
+<audio id="completeWordSound" src="completeWord.mp3"></audio>
+<audio id="completeRoundSound" src="completeRound.mp3"></audio>
+<audio id="giveClueSound" src="giveClue.mp3"></audio>
+<audio id="goBackSound" src="goBack.mp3"></audio>
+
+<script src="myscript_game.js"></script>
+
+</body>
+</html>
