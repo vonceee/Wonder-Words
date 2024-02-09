@@ -92,6 +92,9 @@
                 let button = document.createElement("button");
                 button.textContent = letter;
                 button.setAttribute('data-letter', letter);
+		if (guessedLetters.includes(letter)) {
+                button.disabled = true;
+            }
                 if (lettersRevealedByClues.includes(letter)) {
                 button.disabled = true;
             }
