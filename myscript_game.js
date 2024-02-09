@@ -14,6 +14,8 @@
         // Add the "show" class to the overlay element
         document.getElementById('overlay').classList.add('show');
         document.getElementById('clueModal').classList.add('show');
+
+        // Disable the button momentarily
     }
 
     function closeCluePopup() {
@@ -102,12 +104,13 @@
         return id === 'custom-alert-box' && document.getElementById(id).style.display !== 'none';
       });
 
+    // Now you can use isCustomAlertVisible in an if condition
       if (letter == 'ENTER' && isCustomAlertVisible) { // Function that accepts Enter and closes the popup
         removeCustomAlert();
         return;
       }
-      
-	});
+        // Your code here for when the custom-alert-box overlay is visible
+      });
 
     function createKeyboard() {
         let keyboardDiv = document.getElementById("keyboard");
@@ -165,12 +168,12 @@
 	
     function useClue(clueCategory) {
         const clueCost = 25;
-        let clueButtons = document.getElementsByClassName("clueButton");
+        let clueButtons = document.getElementsByClassName("modalClueButtons"); // To fix unknown class name clueButton turned to modalClueButtons
 
         if (clues <= 0) {
             showCustomAlert("You have no more clues left!");
             for (let i = 0; i < clueButtons.length; i++) {
-                clueButtons[i].disabled = true;
+                clueButtons[i].disabled = true; // Disables Use Clue button
             }
             return;
         }
@@ -413,6 +416,7 @@
 		createHearts();
 	}
 	
+    // To delete function if this is not used
 	function disableBackgroundButtons(disable) {
         let backgroundButtons = document.querySelectorAll('#keyboard button, #clueButton, #playMusic');
         backgroundButtons.forEach(button => {
@@ -432,25 +436,41 @@
 		}
 	}
 	
-	playMusic.addEventListener("click", function () {
+	playMusic.addEventListener("click", function () { //Add onClick function
 		toggleBackgroundMusic();
 		playAudioById("buttonPress");
 	});
 
-	function toggleBackgroundMusic() {
-		let backgroundMusic = document.getElementById("backgroundMusic");
+    let backgroundMusicPlaying = false;
 
-		if (backgroundMusic.paused) {
-			backgroundMusic.play();
+	function toggleBackgroundMusic() {
+		
+        //set to false because music is disabled by default
+        
+         let backgroundMusic = document.getElementById("backgroundMusic");
+        let toggleMusicButton = document.getElementById("playMusic"); // Get ID of Toggle Music Button and Assigned to Variable
+        
+
+
+		if (backgroundMusicPlaying == false) {
+            toggleMusicButton.innerHTML = "<b>Untoggle Music</b>";
+            backgroundMusic.play();
+            backgroundMusicPlaying = true;
+            
+          
 		} else {
+            toggleMusicButton.innerHTML = "<b>Toggle Music</b>";
 			backgroundMusic.pause();
+            backgroundMusicPlaying = false;
+            
 		}
 	}
 
     initGame();
 	
-	
-	document.addEventListener('DOMContentLoaded', function() {
+
+    // unsure what this function does 
+	DOCUMENT.addEventListener('DOMContentLoaded', function() {
 	  var audioElement = document.getElementById("buttonPress");
 	  var parentElement = document.body; // Or another container element
 

@@ -340,5 +340,21 @@
 	#reset-alert-content {
 		margin-top: 2px;
 	}
+
+	/* inefficent way of making clue button disabled. Find better implementation of button disabling */
+	.modalClueButtons:disabled {
+		background-color: gray;
+		border-color: gray;
+		color: gainsboro;
+		text-shadow: none;
+	}
+
+	/* same problem as above */
+	#playMusic:disabled { 
+		background-color: gray;
+		border-color: gray;
+		color: gainsboro;
+		text-shadow: none;
+	}
 	
 	/* --alertBox/popupBox--! */
