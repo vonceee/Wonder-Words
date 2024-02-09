@@ -64,7 +64,7 @@
 	/* --resetgameModal--! */
 	
 	/* !--keyboard-- */
-	document.addEventListener('keyup', function(event) {
+	document.addEventListener('keydown', function(event) { // From keyup turned to keydown to fix shortcut reload bug
 	  // Define the IDs of the overlays
 	  var overlayIds = ['clueModal', 'custom-alert-box', 'reset-alert-box'];
 
