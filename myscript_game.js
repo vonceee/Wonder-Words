@@ -68,7 +68,8 @@
 	  // Define the IDs of the overlays
 	  var overlayIds = ['clueModal', 'custom-alert-box', 'reset-alert-box'];
 
-	  // Check if any of the overlays are visible
+	  
+      // Check if any of the overlays are visible
 	  var isAnyOverlayVisible = overlayIds.some(function(id) {
 		var overlay = document.getElementById(id);
 		if (overlay) {
@@ -80,7 +81,7 @@
 
 	  // If any overlay is visible, don't allow keyboard input
 	  if (isAnyOverlayVisible  && !(event.key === 'Enter')) { // Disables ALL keyboard input EXCEPT  for ENTER
-		return;
+        return;
 	  }
 
 	  // Convert the key to uppercase to match the case of the letters in the word
@@ -95,9 +96,15 @@
 		  buttonElement.click();
 		}
 	  }
-      if (letter == 'ENTER') { // Function that accepts Enter and closes the popup
+
+      // Check if the custom-alert-box overlay is visible
+      var isCustomAlertVisible = overlayIds.some(function(id) {
+        return id === 'custom-alert-box' && document.getElementById(id).style.display !== 'none';
+      });
+
+      if (letter == 'ENTER' && isCustomAlertVisible) { // Function that accepts Enter and closes the popup
         removeCustomAlert();
-        return false;
+        return;
       }
       
 	});
