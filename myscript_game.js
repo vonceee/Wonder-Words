@@ -79,7 +79,7 @@
 	  });
 
 	  // If any overlay is visible, don't allow keyboard input
-	  if (isAnyOverlayVisible  && event.key !== 'Enter') { // Disables ALL keyboard input except for ENTER
+	  if (isAnyOverlayVisible  && !(event.key === 'Enter')) { // Disables ALL keyboard input EXCEPT  for ENTER
 		return;
 	  }
 
@@ -269,7 +269,7 @@
             updateDisplay();
             updateScoreboard();
         } else {
-            showCustomAlert(`Congratulations! You completed all categories./nPoints: ${totalPoints}`, resetGame);
+            showCustomAlert(`Congratulations! You completed all categories.<br>Points: ${totalPoints}`, resetGame); // Replace 
         }
     }
 
