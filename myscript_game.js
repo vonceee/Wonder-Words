@@ -236,7 +236,7 @@
     let words = [easyWords, moderateWords, difficultWords];
 
     function startRound() {
-        if (currentRound < categories.length - 1) {
+        if (currentRound < categories.length) {
             currentWordObject = getRandomWord();
             currentWord = currentWordObject.word;
             currentQuestion = currentWordObject.question;
@@ -245,8 +245,7 @@
             updateDisplay();
             updateScoreboard();
         } else {
-            showCustomAlert(`Congratulations! You completed all categories./nPoints: ${totalPoints}`);
-            resetGame();
+            showCustomAlert(`Congratulations! You completed all categories./nPoints: ${totalPoints}`, resetGame);
         }
     }
 
@@ -260,11 +259,10 @@
             selectedWordObject.used = true;
             return selectedWordObject;
         } else {
-            showCustomAlert(`Congratulations! You have finished the ${categories[currentRound]} round! Moving onto the next round.`);
+            showCustomAlert(`Congratulations! You have finished the ${categories[currentRound]} round!`, startRound);
             playAudioById("completeRoundSound");
             currentRound++;
-            return getRandomWord();
-        }
+	}
     }
 
     function resetQuestionsUsage() {
