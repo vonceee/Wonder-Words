@@ -410,6 +410,13 @@
         currentRound = 0;
         incorrectGuesses = 0;
         clues = 3;
+
+        let enableClueButton = document.getElementsByClassName("modalClueButtons"); 
+        for (let i = 0; i < enableClueButton.length; i++) {
+            enableClueButton[i].disabled = false; // Disables Use Clue button
+        }
+        
+
         resetQuestionsUsage();
         startRound();
         resetKeyboard();
