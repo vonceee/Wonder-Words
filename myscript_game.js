@@ -14,6 +14,7 @@
         // Add the "show" class to the overlay element
         document.getElementById('overlay').classList.add('show');
         document.getElementById('clueModal').classList.add('show');
+        playAudioById("buttonPress");
 
         // Disable the button momentarily
     }
@@ -22,6 +23,7 @@
 		// Remove the "show" class from both the overlay and cluePopup elements
 		document.getElementById('overlay').classList.remove('show');
 		document.getElementById('clueModal').classList.remove('show');
+        playAudioById("buttonPress");
 	}
 	
 	/* --clueModal--! */
@@ -167,16 +169,9 @@
 	}
 	
     function useClue(clueCategory) {
+        playAudioById("buttonPress");
         const clueCost = 25;
         let clueButtons = document.getElementsByClassName("modalClueButtons"); // To fix unknown class name clueButton turned to modalClueButtons
-
-        if (clues <= 0) {
-            showCustomAlert("You have no more clues left!");
-            for (let i = 0; i < clueButtons.length; i++) {
-                clueButtons[i].disabled = true; // Disables Use Clue button
-            }
-            return;
-        }
 
         if (totalPoints >= clueCost) {
 
@@ -187,7 +182,18 @@
                 guessedLetters.push(randomClue);
                 lettersRevealedByClues.push(randomClue);
                 totalPoints -= clueCost;
-                clues--;
+                clues--;  
+
+                // Moved if statemenet from line 173 to instantly disable button once it reaches 0
+                if (clues == 0) {
+                    console.log("No more clues left!"); // Debugging statement
+                   
+                    for (let i = 0; i < clueButtons.length; i++) {
+                        clueButtons[i].disabled = true; // Disables Use Clue button
+                    }
+                    
+                }
+
                 showCustomAlert(`Clue used! The letter is: ${randomClue}`);
                 updateDisplay();
                 updateScoreboard();
@@ -308,7 +314,12 @@
     }
 
     function updateDisplay() {
-		let display = `${currentQuestion}<br><br>`;
+        let display = `${currentQuestion}<br><br>`;
+
+        // Cannot display two showCustomAlert in one function? Moved to this function instead
+        if (clues == 0) {
+            showCustomAlert("You have no more clues left!")
+        }
 
 		for (let letter of currentWord) {
 			if (!isLetter(letter)) {

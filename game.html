@@ -34,14 +34,16 @@
 			<div id="questions"></div><br>
 		</div>
 		
-		<button class="btn1" id="clueButton" onclick="showCluePopup()"><b>Use Clue</b></button>
+		<button class="modalClueButtons" id="clueButton" onclick="showCluePopup()"><b>Use Clue</b></button>
 		
 		<div class="modal" id="clueModal">
 			<div class="modal-content popup-overlay">
 				<p>Please select a type of clue.<br><br><br></p>
-				<button class="btn1" onclick="useClue('consonant'), closeCluePopup()">Consonant</button>
-				<button class="btn1" onclick="useClue('vowel'), closeCluePopup()">Vowel</button>
-				<button class="btn1" onclick="closeCluePopup()">Cancel</button>
+				<!-- change button class so line 171 works in javaScript -->
+				<button class="modalClueButtons" onclick="useClue('consonant'), closeCluePopup()">Consonant</button> 
+				<button class="modalClueButtons" onclick="useClue('vowel'), closeCluePopup()">Vowel</button>
+				<button class="modalClueButtons" onclick="closeCluePopup()">Cancel</button>
+				<!-- change button class so line 171 works in javaScript -->
 			</div>
 		</div>
 		
