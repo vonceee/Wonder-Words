@@ -30,8 +30,15 @@
 	
 	/* !--answerModal-- */
 
-    function showCustomAlert(message, callback) {
+    function showCustomAlert(message, callback, textSize) {
+        if (textSize == undefined) {
+            textSize = 5;
+        }
         document.getElementById('custom-alert-content').innerText = message;
+        
+        document.getElementById('custom-alert-content').style.fontSize = textSize + "vh"; // Makes font size larger 
+        document.getElementById('custom-alert-content').style.marginTop = '5%';
+        
         document.getElementById('custom-alert-box').style.display = 'block';
         document.getElementById('custom-alert-box').dataset.callback = String(callback);
 		document.getElementById('overlay').style.display = 'block';
@@ -236,11 +243,11 @@
     let easyWords = [
         { word: "APPLE", question: "A fruit often associated with teachers." },
         { word: "BANANA", question: "A yellow fruit with a peel." },
-        { word: "ORANGE", question: "A citrus fruit with a tough outer layer." },
+        { word: "ORANGE", question: "A citrus fruit with \na tough outer layer." },
         { word: "APOLLO", question: "Who was the ancient greek god of sun." },
         { word: "HANGAROO", question: "A word-guessing game with a kangaroo theme." },
         { word: "GIRAFFE", question: "A long-necked mammal found in Africa." },
-        { word: "ELEPHANT", question: "A large land mammal known for its tusks." },
+        { word: "ELEPHANT", question: "A large land mammal known \n for its tusks." },
         { word: "C", question: "Programmer's favorite note." },
         { word: "COFFEE", question: "A popular caffeinated beverage." },
         { word: "ZEUS", question: "Who was the ancient greek god of lightning." }
@@ -382,7 +389,7 @@
 
             if (incorrectGuesses === 3) {
                 playAudioById("deathSound");
-                showCustomAlert(`Game over. You reached the maximum incorrect guesses.\nPoints: ${totalPoints}`);
+                showCustomAlert(`Game over. You reached the maximum incorrect guesses.\nPoints: ${totalPoints}`, null, 4);
                 resetGame();
             } else {
                 updateScoreboard();
@@ -483,6 +490,22 @@
             
 		}
 	}
+
+    // Plays buttonPress and redirects after a short delay
+    window.onload = function() { // adds button press in back button
+        var a = document.getElementById("backBtn");  
+        a.onclick = function (event) {
+            event.preventDefault(); // Prevent default redirection behavior
+    
+            playAudioById("buttonPress");
+    
+            // Delay redirection by 500 milliseconds (0.5 seconds)
+            setTimeout(function() {
+                window.location.href = "index.html"; // Redirect to index.html
+            }, 100);
+        }
+    }
+    
 
     initGame();
 	

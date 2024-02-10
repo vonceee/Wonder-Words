@@ -177,7 +177,7 @@
 		align-self: flex-start;
 	}
 	
-	.PANEL-1 {
+	.Panel-1 {
 		margin-top: 2vh;
 		margin-left: 5vh;
 		display: flex;
@@ -234,7 +234,7 @@
 		background-image: linear-gradient(to bottom right, bisque, burlywood);
 		
 		margin:  5% auto; /*  15% from the top and centered */
-		padding:  2vh;
+		padding:  3vh;
 		
 		border-color: brown;
 		border-style: solid;
@@ -243,6 +243,8 @@
 		width:  50%; /* Could be more or less, depending on screen size */
 		
 		text-align:center;
+
+		font-size: 3.11vh;
 	}
 	
 	.modal-content button {
@@ -313,9 +315,11 @@
 		border-width: 8px;
 	}
 
+	/* redundant css, becomes overidden by inline css of myscript_game.js */
 	#custom-alert-content {
 		margin-top: 2px;
 	}
+	/* redundant css, becomes overidden by inline css of myscript_game.js */
 		
 	#reset-alert-box {
 		position: fixed;
