@@ -160,7 +160,7 @@
 	function createHearts() {
 		let strikesIconDiv = document.getElementById("strikesIcon");
 		let image = document.createElement("img");
-		image.src = "hearts-3.png";
+		image.src = "./assets/hearts-3.png";
 		strikesIconDiv.appendChild(image);
 		document.getElementById("strikesPanel").appendChild(strikesIconDiv);
 	}
@@ -171,7 +171,7 @@
 
 		// Create and append the original image
 		let image = document.createElement("img");
-		image.src = "hearts-3.png";
+		image.src = "./assets/hearts-3.png";
 		strikesIconDiv.appendChild(image);
 	}
 	
@@ -380,11 +380,11 @@
 			let existingImage = strikesIconDiv.querySelector("img");
 			
 			if (incorrectGuesses === 1) {
-				existingImage.src = "hearts-2.png";
+				existingImage.src = "./assets/hearts-2.png";
 			} else if (incorrectGuesses === 2) {
-				existingImage.src = "hearts-1.png";
+				existingImage.src = "./assets/hearts-1.png";
 			} else if (incorrectGuesses === 3) {
-				existingImage.src = "hearts-0.png";
+				existingImage.src = "./assets/hearts-0.png";
 			}
 
             if (incorrectGuesses === 3) {
