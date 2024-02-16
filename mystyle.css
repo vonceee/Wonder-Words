@@ -1,0 +1,364 @@
+	@font-face {
+		font-family: pixel;
+		src: url(assets/pixel.ttf);
+	}
+	
+	body {		
+		margin:0;
+		
+		font-family: pixel;
+		font-weight: bolder;
+		font-size: 3vh;
+
+		background: url("./assets/background.png") no-repeat center center fixed;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		
+		padding-top: 5vh;
+		
+	}
+	
+	footer {
+		position: fixed;
+		font-weight: bolder;
+		font-size: 3vh;
+		
+		bottom: 0;
+		width: 100%;
+		height: 2vh;
+		
+		background-color: bisque; 
+		text-align: center;
+		
+		padding: 2vh;
+	}
+	
+	img {
+		height: 8vh;
+	}
+	
+	#title {
+		height: 50vh;
+	}
+
+	button {
+		font-family: pixel;
+		text-shadow: 1vh 1vh black;
+		font-size: 5vh;
+		color: bisque;
+		
+		width: 90%;
+		height: 8vh;
+		
+		margin: 1vh;
+		
+		background-color: brown;
+		border-color: brown;
+		border-width: 1vh;
+	}
+	
+	button:disabled,button[disabled] {
+		background-color: brown;
+		color: gray;
+		cursor: not-allowed; 
+	}
+	
+	#keyboard button {
+		font-family: pixel;
+		text-shadow: 1vh 1vh black;
+		font-size: 5vh;
+		color: bisque;
+		
+		width: 4vw;
+		height: 8vh;
+		
+		margin: 1vh;
+		
+		background-color: brown;
+		border-color: brown;
+		border-width: 1vh;
+	}
+	
+	#keyboard button:disabled, #keyboard button.correct-guess {
+		background-color: gray;
+		border-color: gray;
+		color: gainsboro;
+		text-shadow: none;
+	}
+	
+	/* !--containers- */
+	.menuBox {
+		margin-left: 2vh;
+		margin-right: 2vh;
+		
+		float: left;
+		width: 25%;
+		height: 85vh;
+
+		border-color: brown;
+		border-style: solid;
+		border-width: 2vh;
+		
+		display: flex;
+		flex-direction: column;
+		
+		justify-content: center;
+		align-items: center;
+		background-image: linear-gradient(to bottom right, bisque, burlywood);
+		
+		animation: slideInLeft 2s ease-out;
+	}
+	
+	.menuBox1 {
+		margin-left: 2vh;
+		margin-right: 2vh;
+
+		float: left;
+		width: 60%;
+		height: 39vh;
+
+		border-color: brown;
+		border-style: solid;
+		border-width: 2vh;
+		
+		display: flex;
+		flex-direction: column;
+		
+		justify-content: center;
+		align-items: center;
+		background-image: linear-gradient(to bottom right, bisque, burlywood);
+		
+	}
+	
+	.menuBox2 {
+		margin: 3vh;
+	
+		margin-left: 2vh;
+		margin-right: 2vh;
+		
+		float: left;
+		width: 60%;
+		height: 39vh;
+
+		border-color: brown;
+		border-style: solid;
+		border-width: 2vh;
+		
+		display: flex;
+		flex-wrap: wrap;
+		
+		justify-content: center;
+		align-items: center;
+		background-image: linear-gradient(to bottom right, bisque, burlywood);
+		
+	}
+	
+	.titleBox {
+		float: left;
+		width: 70%;
+		height: 90vh;
+		
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		
+		animation: slideInTop 2s ease-out;
+	}
+	/* --containers--! */
+	
+	/* !--contents inside the containers-- */
+	.Panel {
+		margin-top: 2vh;
+		margin-left: 5vh;
+		display: flex;
+		align-items: center;
+		align-self: flex-start;
+	}
+	
+	.Panel-1 {
+		margin-top: 2vh;
+		margin-left: 5vh;
+		display: flex;
+		flex-direction: column;
+		align-self: flex-start;
+	}
+	
+	#word-display {
+		font-size: 5vh;
+		text-align: center;
+	}
+	/* --contents inside the containers--! */
+	
+	/* !--animations-- */
+	@keyframes slideInTop {
+		0% {
+			transform: translateY(-100%);
+		}
+
+		100% {
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes slideInLeft {
+		0% {
+			transform: translateX(-100%);
+		}
+
+		100% {
+			transform: translateX(0);
+		}
+	}
+	/* --animations--! */
+	
+	/* !--howToPlaybtn (Modal)-- */
+	
+	/* The Modal (background) */
+	.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index:  1; /* Sit on top */
+		left:  0;
+		top:  0;
+		width:  100%; /* Full width */
+		height:  100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	}
+
+	/* Modal Content/Box */
+	.modal-content {
+		background-image: linear-gradient(to bottom right, bisque, burlywood);
+		
+		margin:  5% auto; /*  15% from the top and centered */
+		padding:  3vh;
+		
+		border-color: brown;
+		border-style: solid;
+		border-width: 1vh;
+		
+		width:  50%; /* Could be more or less, depending on screen size */
+		
+		text-align:center;
+
+		font-size: 3.11vh;
+	}
+	
+	.modal-content button {
+		box-sizing: border-box;
+		width: calc(30% - 1vh);
+		margin: 0 auto;
+	}
+
+	/* The Close Button */
+	#closeModalBtn {
+	  color: black;
+	  float: right;
+	  font-size:  8vh;
+	  font-weight: bold;
+	}
+
+	#closeModalBtn:hover,
+	#closeModalBtn:focus {
+	  color: gray;
+	  text-decoration: none;
+	  cursor: pointer;
+	}
+
+	/* i think placeholders  */
+	.overlay {
+	  display: none;
+	  position: fixed;
+	  top:  0;
+	  left:  0;
+	  width:  100%;
+	  height:  100%;
+	  background-color: rgba(0,0,0,0.5);
+	}
+	
+	.show {
+		display: block;
+	}
+	/* i think placeholders */
+	
+	/* --howToPlaybtn (Modal)--! */	
+	
+	
+	/* !--alertBox/popupBox-- */
+	
+	#custom-alert-box {
+		position: fixed;
+		display: none;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 20px;
+		background-image: linear-gradient(to bottom right, bisque, burlywood);
+		border: 8px solid brown;
+		z-index: 9999;
+		width: 600px;
+		text-align: center;
+	}
+	
+	#custom-button {
+		margin-top: 50px;
+		height: 65px;
+		font-family: pixel;
+		color: bisque;
+		text-shadow: 5px 5px black;
+		font-size: 25px;
+		background-color: brown;
+		border-color: brown;
+		border-width: 8px;
+	}
+
+	/* redundant css, becomes overidden by inline css of myscript_game.js */
+	#custom-alert-content {
+		margin-top: 2px;
+	}
+	/* redundant css, becomes overidden by inline css of myscript_game.js */
+		
+	#reset-alert-box {
+		position: fixed;
+		display: none;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 20px;
+		background-image: linear-gradient(to bottom right, bisque, burlywood);
+		border: 8px solid brown;
+		z-index: 9999;
+		width: 600px;
+		text-align: center;
+	}
+	
+	#reset-alert-box button{
+		box-sizing: border-box;
+		width: calc(33.33% - 8px);
+		margin: 0 auto;
+	}
+	
+	#reset-alert-content {
+		margin-top: 2px;
+	}
+
+	/* inefficent way of making clue button disabled. Find better implementation of button disabling */
+	.modalClueButtons:disabled {
+		background-color: gray;
+		border-color: gray;
+		color: gainsboro;
+		text-shadow: none;
+	}
+
+	/* same problem as above */
+	#playMusic:disabled { 
+		background-color: gray;
+		border-color: gray;
+		color: gainsboro;
+		text-shadow: none;
+	}
+	
+	/* --alertBox/popupBox--! */

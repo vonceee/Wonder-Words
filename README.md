@@ -1,0 +1,1 @@
+![Blue Lock Mentality](https://litter.catbox.moe/qfp976.jpg)
