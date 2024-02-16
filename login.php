@@ -32,7 +32,10 @@
                 $user=mysqli_fetch_array($result, MYSQLI_ASSOC);
                 if ($user) {
                     if (password_verify($password, $user["password"])) {
-                        $_SESSION["user"]="yes";
+                        
+                        // Gets the user?
+                        $_SESSION["user"]=$user;
+                        
                         header("Location: index.php");
                         die();
                     } else {
