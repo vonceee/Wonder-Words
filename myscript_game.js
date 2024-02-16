@@ -241,41 +241,17 @@
     }
 
     let easyWords = [
-        { word: "APPLE", question: "A fruit often associated with teachers." },
-        { word: "BANANA", question: "A yellow fruit with a peel." },
-        { word: "ORANGE", question: "A citrus fruit with \na tough outer layer." },
-        { word: "APOLLO", question: "Who was the ancient greek god of sun." },
-        { word: "HANGAROO", question: "A word-guessing game with a kangaroo theme." },
-        { word: "GIRAFFE", question: "A long-necked mammal found in Africa." },
-        { word: "ELEPHANT", question: "A large land mammal known \n for its tusks." },
-        { word: "C", question: "Programmer's favorite note." },
-        { word: "COFFEE", question: "A popular caffeinated beverage." },
+
         { word: "ZEUS", question: "Who was the ancient greek god of lightning." }
     ];
 
     let moderateWords = [
-        { word: "PROGRAMMING", question: "The process of writing code for software development." },
-        { word: "ALGORITHM", question: "A set of instructions or rules for solving a problem." },
-        { word: "DATABASE", question: "A structured collection of data." },
-        { word: "NETWORK", question: "A system of interconnected computers or devices." },
-        { word: "JAVASCRIPT", question: "A scripting language used for web development." },
-        { word: "PYTHON", question: "A versatile programming language." },
-        { word: "JAVA", question: "A popular object-oriented programming language." },
-        { word: "HTML", question: "A markup language for creating web pages." },
-        { word: "CSS", question: "A style sheet language for designing web pages." },
+        
         { word: "CLOUD", question: "A network of remote servers for storing and managing data." }
     ];
 
     let difficultWords = [
-        { word: "CYBERSECURITY", question: "The practice of protecting computer systems and networks from digital attacks." },
-        { word: "BLOCKCHAIN", question: "A decentralized and distributed ledger technology." },
-        { word: "MACHINELEARNING", question: "A subset of artificial intelligence that enables machines to learn from data." },
-        { word: "ARTIFICIALINTELLIGENCE", question: "The simulation of human intelligence in machines." },
-        { word: "WEBDEVELOPMENT", question: "The process of building and maintaining websites." },
-        { word: "DATASCIENCE", question: "The extraction of knowledge and insights from structured and unstructured data." },
-        { word: "FRONTEND", question: "The part of a website that users interact with directly." },
-        { word: "BACKEND", question: "The server-side of a website, responsible for processing requests." },
-        { word: "VIRTUALIZATION", question: "The creation of a virtual version of a resource, such as an operating system or server." },
+        
         { word: "DOCKER", question: "A platform for developing, shipping, and running applications in containers." }
     ];
 
@@ -292,10 +268,27 @@
             updateDisplay();
             updateScoreboard();
         } else {
-            showCustomAlert(`Congratulations! You completed all categories.<br>Points: ${totalPoints}`, resetGame); // Replace 
+            // Send to database through php
+            let scoreFinal = totalPoints;
+            $.ajax({
+                url: "score_inserter.php",
+                type: "POST",
+                data: { score: scoreFinal }, // Send the score as data
+                success: function(response) {
+                    console.log(response); // Handle the response from PHP
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // Handle errors
+                }
+            });
+            // Send to database through php
+            showCustomAlert(`Congratulations! You completed all categories.\nPoints: ${totalPoints}`, resetGame);
+
         }
     }
-
+    
+ 
+    
     function getRandomWord() {
         let categoryIndex = currentRound;
         let availableQuestions = words[categoryIndex].filter(wordObj => !wordObj.used);
@@ -351,19 +344,19 @@
 
     function handleGuess(letter, buttonElement) {
         let occurrences = getAllOccurrences(currentWord, letter);
-
+    
         if (occurrences.length > 0) {
             occurrences.forEach(position => {
                 if (!guessedLetters.includes(letter) && currentWord[position] === letter) {
                     guessedLetters.push(letter);
                     playAudioById("correctLetterSound");
-
+    
                     if (guessedLetters.length === new Set(currentWord.split("")).size) {
                         playAudioById("completeWordSound");
                         showCustomAlert(`Congratulations! You guessed the word: ${currentWord}`, startRound);
                         totalPoints += 10;
                     }
-
+    
                     updateDisplay();
                     updateScoreboard();
                     buttonElement.disabled = true; // Disable the button
@@ -511,7 +504,7 @@
 	
 
     // unsure what this function does 
-	DOCUMENT.addEventListener('DOMContentLoaded', function() {
+	document.addEventListener('DOMContentLoaded', function() {
 	  var audioElement = document.getElementById("buttonPress");
 	  var parentElement = document.body; // Or another container element
 

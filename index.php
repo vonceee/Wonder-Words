@@ -2,10 +2,16 @@
     // Start the session
     session_start();
 
+    // Include the database connection file
+    include_once "database.php";
+
     // Check if user data exists in the session
     if(isset($_SESSION["user"])) {
         // Retrieve the user's first name from the session
         $firstName = $_SESSION["user"]["First_Name"]; // Check the session key and structure
+        
+        // Retrieve the user's ID from the session
+        $userId = $_SESSION["user"]["id"];
     } else {
         // Redirect the user to the login page if session data is not available
         header("Location: login.php");
@@ -28,7 +34,7 @@
 </head>
 <body>
     <div class ="container">
-        <h1>Welcome to Dashboard, <?php echo $firstName; ?></h1>
+    <h1>Welcome to Dashboard, <?php echo $firstName . " (User ID: " . $userId . ")"; ?></h1>
         <a href="homepage.php" class="btn btn-link">Play Hangaroo</a>
         <a href="logout.php" class="btn btn-warning">Logout</a>
     </div>
