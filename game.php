@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(!isset($_SESSION["user"])){
+        header("Location: login.php");
+    }
+?>  
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +22,9 @@
 	<div class="menuBox">
 	
 		<div class="Panel">
-			<a id="backBtn"><img src="./assets/exit.png" title="Go Back"></a>
+			<a id="backBtn" href="homepage.php">
+				<img src="./assets/exit.png" title="Go Back">
+			</a>
 		</div>
 		
 		<div class="Panel">
@@ -78,7 +87,7 @@
 <footer>Mendoza | Ranola | Sibucao | Marcos | De Francia</footer>
 
 <audio id="buttonPress" src="./assets/buttonPress.mp3"></audio>
-<audio id="backgroundMusic" src="./assets/gameBackground.mp3" autoplay loop></audio>
+<audio id="backgroundMusic" src="./assets/gameBackground.mp3"  loop></audio>
 <audio id="deathSound" src="./assets/death.mp3"></audio>
 <audio id="wrongLetterSound" src="./assets/damage.mp3"></audio>
 <audio id="correctLetterSound" src="./assets/correctLetter.mp3"></audio>
