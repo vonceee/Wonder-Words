@@ -492,19 +492,19 @@
 	}
 
     // Plays buttonPress and redirects after a short delay
-    // window.onload = function() { // adds button press in back button
-    //     var a = document.getElementById("backBtn");  
-    //     a.onclick = function (event) {
-    //         event.preventDefault(); // Prevent default redirection behavior
+    window.onload = function() { // adds button press in back button
+        var a = document.getElementById("backBtn");  
+        a.onclick = function (event) {
+            event.preventDefault(); // Prevent default redirection behavior
     
-    //         playAudioById("buttonPress");
+            playAudioById("buttonPress");
     
-    //         // Delay redirection by 500 milliseconds (0.5 seconds)
-    //         setTimeout(function() {
-    //             window.location.href = "homepage.html"; // Redirect to index.html
-    //         }, 100);
-    //     }
-    // }
+            // Delay redirection by 500 milliseconds (0.5 seconds)
+            setTimeout(function() {
+                window.location.href = "homepage.php"; // Redirect to index.html
+            }, 100);
+        }
+    }
     
 
     initGame();

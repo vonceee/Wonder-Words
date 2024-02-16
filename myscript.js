@@ -2,7 +2,7 @@
 	document.addEventListener('DOMContentLoaded', function() {
 		var playButton = document.getElementById('playBtn');
 		playButton.addEventListener('click', function() {
-			window.location.href = 'game.html';
+			window.location.href = 'game.php';
 		});
 	});
 	/* --playButton--! */
