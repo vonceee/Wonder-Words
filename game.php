@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="points.png">
+	<link rel="icon" href="./assets/points.png">
 	<link rel="stylesheet" href="mystyle.css">
 
     <title>Wonder Words</title>
@@ -15,11 +15,11 @@
 	<div class="menuBox">
 	
 		<div class="Panel">
-			<a id="backBtn" href="index.html"><img src="exit.png" title="Go Back"></a>
+			<a id="backBtn"><img src="./assets/exit.png" title="Go Back"></a>
 		</div>
 		
 		<div class="Panel">
-			<div id="pointsIcon"><img src="points.png" title="Points"></div>
+			<div id="pointsIcon"><img src="./assets/points.png" title="Points"></div>
 			<div id="points" style="margin-left: 2vh;"></div>
 		</div>
 		
@@ -77,15 +77,15 @@
 
 <footer>Mendoza | Ranola | Sibucao | Marcos | De Francia</footer>
 
-<audio id="buttonPress" src="buttonPress.mp3"></audio>
-<audio id="backgroundMusic" src="gameBackground.mp3" autoplay loop></audio>
-<audio id="deathSound" src="death.mp3"></audio>
-<audio id="wrongLetterSound" src="damage.mp3"></audio>
-<audio id="correctLetterSound" src="correctLetter.mp3"></audio>
-<audio id="completeWordSound" src="completeWord.mp3"></audio>
-<audio id="completeRoundSound" src="completeRound.mp3"></audio>
-<audio id="giveClueSound" src="giveClue.mp3"></audio>
-<audio id="goBackSound" src="goBack.mp3"></audio>
+<audio id="buttonPress" src="./assets/buttonPress.mp3"></audio>
+<audio id="backgroundMusic" src="./assets/gameBackground.mp3" autoplay loop></audio>
+<audio id="deathSound" src="./assets/death.mp3"></audio>
+<audio id="wrongLetterSound" src="./assets/damage.mp3"></audio>
+<audio id="correctLetterSound" src="./assets/correctLetter.mp3"></audio>
+<audio id="completeWordSound" src="./assets/completeWord.mp3"></audio>
+<audio id="completeRoundSound" src="./assets/completeRound.mp3"></audio>
+<audio id="giveClueSound" src="./assets/giveClue.mp3"></audio>
+<audio id="goBackSound" src="./assets/goBack.mp3"></audio>
 
 <script src="myscript_game.js"></script>
 
