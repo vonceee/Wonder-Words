@@ -269,23 +269,29 @@
             updateScoreboard();
         } else {
             // Send to database through php
-            let scoreFinal = totalPoints;
-            $.ajax({
-                url: "score_inserter.php",
-                type: "POST",
-                data: { score: scoreFinal }, // Send the score as data
-                success: function(response) {
-                    console.log(response); // Handle the response from PHP
-                },
-                error: function(xhr, status, error) {
-                    console.error(error); // Handle errors
-                }
-            });
+            insertScore(totalPoints);
             // Send to database through php
+            
             showCustomAlert(`Congratulations! You completed all categories.\nPoints: ${totalPoints}`, resetGame);
-
         }
     }
+
+
+    // INSERT SCORE TO DATABASE FUNCTION
+    function insertScore(scoreFinal) {
+        $.ajax({
+            url: "score_inserter.php",
+            type: "POST",
+            data: { score: scoreFinal }, // Send the score as data
+            success: function(response) {
+                console.log(response); // Handle the response from PHP
+            },
+            error: function(xhr, status, error) {
+                console.error(error); // Handle errors
+            }
+        });
+    }
+    
     
  
     
@@ -406,11 +412,21 @@
     }
 
     function resetGame() {
-        totalPoints = 0;
         currentRound = 0;
-        incorrectGuesses = 0;
         clues = 3;
 
+        // If gameOver, insert score first before reverting to 0
+        if (incorrectGuesses == 3){
+            insertScore(totalPoints);
+            incorrectGuesses = 0;
+            totalPoints = 0;
+        }
+        
+        else {
+            incorrectGuesses = 0;
+            totalPoints = 0;
+            }
+        
         let enableClueButton = document.getElementsByClassName("modalClueButtons"); 
         for (let i = 0; i < enableClueButton.length; i++) {
             enableClueButton[i].disabled = false; // Disables Use Clue button
