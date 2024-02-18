@@ -1,11 +1,4 @@
 <?php
-    session_start();
-    if(!isset($_SESSION["user"])){
-        header("Location: index.php");
-    }
-?>
-
-<?php
 // Include the database connection file
 include_once "database.php";
 
