@@ -81,10 +81,15 @@
 						echo "<div class='leaderboard-columns'>";
 						echo "<div class='column'><h3>Username</h3></div>";
 						echo "<div class='column'><h3>Score</h3></div>";
+						$rank = 1;
 
 						foreach ($topScores as $score) {
+							if ($rank === 1) {
+								echo "<span>&#x1F451;</span>"; // Crown icon
+							}
 							echo "<div class='column'>" . $score['username'] . $score['score'] . "</div>";
 							echo "<br>";
+							$rank++; 
 						}
 						
 						echo "</div>"; // Close leaderboard-columns div
