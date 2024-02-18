@@ -45,6 +45,8 @@
     }
 
     function removeCustomAlert() {
+
+        
         var callbackString = document.getElementById('custom-alert-box').dataset.callback;
         document.getElementById('custom-alert-box').style.display = 'none';
 		document.getElementById('overlay').style.display = 'none';
@@ -54,8 +56,17 @@
                 callback();
             }
         }
+        
+        // This is where no more clues left moved from previous position // Cannot display two showCustomAlert in one function? Moved to this function instead
+        if (clues == 0) {
+            PinakaWalangKwentangFunctionSaBuongMundo();
+        }
     }
 	
+    function PinakaWalangKwentangFunctionSaBuongMundo() { // IT JUST WORKS AHAHAHAHAHAHAHAHAHAHAHAHA
+        showCustomAlert("You have no more clues left!");
+        clues --;
+    }
 	/* --answerModal--! */
 	
 	/* !--resetgameModal-- */
@@ -180,6 +191,10 @@
         const clueCost = 25;
         let clueButtons = document.getElementsByClassName("modalClueButtons"); // To fix unknown class name clueButton turned to modalClueButtons
 
+        // if (clues == 0) {
+        //     showCustomAlert("You have no more clues left!")
+        // }
+
         if (totalPoints >= clueCost) {
 
             let possibleClues = getPossibleClues(clueCategory);
@@ -192,9 +207,7 @@
                 clues--;  
 
                 // Moved if statemenet from line 173 to instantly disable button once it reaches 0
-                if (clues == 0) {
-                    console.log("No more clues left!"); // Debugging statement
-                   
+                if (clues <= 0) {            
                     for (let i = 0; i < clueButtons.length; i++) {
                         clueButtons[i].disabled = true; // Disables Use Clue button
                     }
@@ -323,9 +336,8 @@
         let display = `${currentQuestion}<br><br>`;
 
         // Cannot display two showCustomAlert in one function? Moved to this function instead
-        if (clues == 0) {
-            showCustomAlert("You have no more clues left!")
-        }
+        
+        // }
 
 		for (let letter of currentWord) {
 			if (!isLetter(letter)) {
@@ -343,7 +355,15 @@
     function updateScoreboard() {
 		let answeredQuestions = words[currentRound].filter(wordObj => wordObj.used).length;
 		document.getElementById("points").textContent = `${totalPoints}`;
-		document.getElementById("clues").textContent = `Clues: ${clues}`;
+		
+        // Will display 0 instead -1 in clues, final value of clues is -1 check clues--;
+        if (clues <= 0) {
+            document.getElementById("clues").textContent = `Clues: 0`;    
+        } else {
+            document.getElementById("clues").textContent = `Clues: ${clues}`;
+        }
+        // Will display 0 instead -1 in clues, final value of clues is -1 check clues--;
+
 		document.getElementById("category").textContent = `Category: ${categories[currentRound]}`;
 		document.getElementById("questions").textContent = `Question: ${answeredQuestions}/${words[currentRound].length}`;
 	}
