@@ -1,9 +1,26 @@
-<!-- php research -->
 <?php
-    session_start();
-    if(isset($_SESSION["user"])){
-        header("Location: index.php");
+session_start();
+
+if(isset($_POST["login"])){
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    require_once "database.php";
+    $sql = "SELECT * FROM user WHERE email='$email'";
+    $result = mysqli_query($conn, $sql);
+    $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    if ($user) {
+        if (password_verify($password, $user["password"])) {
+            // Sets the user session
+            $_SESSION["user"] = $user;
+            header("Location: index.php");
+            exit(); // Stop script execution after redirect
+        } else {
+            echo "<div class='alert alert-danger'>Password does not match</div>";
+        }
+    } else {
+        echo "<div class='alert alert-danger'>Email does not match</div>";
     }
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,31 +38,7 @@
 
 </body>
     <div class = "container">
-        <?php
 
-        if(isset($_POST["login"])){
-            $email=$_POST["email"];
-            $password=$_POST["password"];
-                require_once "database.php";
-                $sql="SELECT * FROM user WHERE email='$email'";
-                $result=mysqli_query($conn, $sql);
-                $user=mysqli_fetch_array($result, MYSQLI_ASSOC);
-                if ($user) {
-                    if (password_verify($password, $user["password"])) {
-                        
-                        // Gets the user?
-                        $_SESSION["user"]=$user;
-                        
-                        header("Location: index.php");
-                        die();
-                    } else {
-                        echo "<div class='alert alert-danger'> Password does not match</div>";
-                    }
-                } else {
-                    echo "<div class='alert alert-danger'>Email does not match </div>";
-                }
-        }
-    ?>
         <form action="login.php" method="post">
                         <div class="form-group">
                             <label for="email">Email:</label>
