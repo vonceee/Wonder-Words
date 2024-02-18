@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,12 +28,9 @@
 		<br><br>
 		
 		<!-- Only Appear if User is Logged In -->
-		<?php
-        session_start();
-        if(isset($_SESSION["user"])){
+		<?php if(isset($_SESSION["user"])){
             echo '<a href="#" id="logoutBtn"><button class="btn1"><b>Logout</b></button></a>';
-        }
-    	?>	
+        }?>	
 		<!-- Only Appear if User is Logged In -->
 
 		<!-- The Modal -->
