@@ -1,3 +1,11 @@
+<!-- LEADERBOARD DEPRECATED THIS IS NOT BEING USED THIS IS NOT BEING USED THIS IS NOT BEING USED -->
+<!-- LEADERBOARD DEPRECATED THIS IS NOT BEING USED THIS IS NOT BEING USED THIS IS NOT BEING USED -->
+<!-- LEADERBOARD DEPRECATED THIS IS NOT BEING USED THIS IS NOT BEING USED THIS IS NOT BEING USED -->
+<!-- LEADERBOARD DEPRECATED THIS IS NOT BEING USED THIS IS NOT BEING USED THIS IS NOT BEING USED -->
+<!-- LEADERBOARD DEPRECATED THIS IS NOT BEING USED THIS IS NOT BEING USED THIS IS NOT BEING USED -->
+<!-- LEADERBOARD DEPRECATED THIS IS NOT BEING USED THIS IS NOT BEING USED THIS IS NOT BEING USED -->
+<!-- LEADERBOARD DEPRECATED THIS IS NOT BEING USED THIS IS NOT BEING USED THIS IS NOT BEING USED -->
+<!-- LEADERBOARD DEPRECATED THIS IS NOT BEING USED THIS IS NOT BEING USED THIS IS NOT BEING USED -->
 <?php
     session_start();
     if(!isset($_SESSION["user"])){
@@ -10,7 +18,8 @@
 include_once "database.php";
 
 // Write the SQL query to select the top 10 highest scores with user's First_Name
-$sql = "SELECT u.First_Name, l.score 
+// Sun, 18 Feb 2024 16:27:01 GMT from user's First_Name turned to username
+$sql = "SELECT u.username, l.score 
         FROM leaderboard l
         INNER JOIN user u ON l.user_id = u.id
         ORDER BY l.score DESC LIMIT 10";
@@ -29,7 +38,7 @@ $topScores = $result->fetch_all(MYSQLI_ASSOC);
 echo "<h2>Top 10 Highest Scores</h2>";
 echo "<ul>";
 foreach ($topScores as $score) {
-    echo "<li>User Name: " . $score['First_Name'] . ", Score: " . $score['score'] . "</li>";
+    echo "<li>User Name: " . $score['username'] . ", Score: " . $score['score'] . "</li>";
 }
 echo "</ul>";
 

@@ -18,12 +18,14 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        
         <div class="container">
             <?php
             if(isset($_POST["submit"])){
                 $LastName = $_POST["LastName"];
                 $FirstName = $_POST["FirstName"];
                 $email = $_POST["email"];
+                $username = $_POST["username"];
                 $password = $_POST["password"];
                 $RepeatPassword = $_POST["repeat_password"];
                 
@@ -33,6 +35,7 @@
 
             if (empty($LastName) OR empty($FirstName) OR empty($email) OR empty($password) OR empty($RepeatPassword)) {
                 array_push($errors, "All fields are required");
+                print_r($POST);
             }
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -49,11 +52,11 @@
                 array_push($errors, "Password does not match");
             }
             require_once "database.php";
-            $sql="SELECT * FROM user WHERE email='$email'";
+            $sql="SELECT * FROM user WHERE username='$username'"; // Username edit from email
             $result=mysqli_query($conn, $sql);
             $rowCount=mysqli_num_rows($result);
             if ($rowCount>0) {
-                array_push($errors, "Email Already Exist");
+                array_push($errors, "Username Already Exist"); // Username edit
             }
             
             if (count($errors)>0){
@@ -62,17 +65,17 @@
                 }
             } else {
                 require_once "database.php";
-                $sql="INSERT INTO user(Last_Name, First_Name, email, password) values(?, ?, ?, ?)";
-                $stmt=mysqli_stmt_init($conn); //initializes a statement and returns an object suitable for mysqli_stmt_prepare()
-                $preparestmt=mysqli_stmt_prepare($stmt, $sql);
+                $sql = "INSERT INTO user (Last_Name, First_Name, email, password, username) VALUES (?, ?, ?, ?, ?)";
+                $stmt = mysqli_stmt_init($conn);
+                $preparestmt = mysqli_stmt_prepare($stmt, $sql);
                 if ($preparestmt) {
-                    mysqli_stmt_bind_param($stmt, "ssss", $LastName, $FirstName, $email, $passwordHash);
+                    mysqli_stmt_bind_param($stmt, "sssss", $LastName, $FirstName, $email, $passwordHash, $username);
                     mysqli_stmt_execute($stmt);
                     echo "<div class='alert alert-success'> You are Registered Successfully! </div>";
                 } else {
                     die("Something went wrong");
                 }
-            }
+            }            
         }   
     ?>
             <form action="registration.php" method="post">
@@ -81,6 +84,9 @@
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="FirstName" placeholder="FirstName">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" placeholder="Username">
                 </div>
                 <div class="form-group">
                     <input type="email" class="form-control" name="email" placeholder="Email">

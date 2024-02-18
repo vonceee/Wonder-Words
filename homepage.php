@@ -61,7 +61,8 @@
 						include_once "database.php";
 
 						// Write the SQL query to select the top 10 highest scores with user's First_Name
-						$sql = "SELECT u.First_Name, l.score 
+						// Sun, 18 Feb 2024 16:27:01 GMT from user's First_Name turned to username
+						$sql = "SELECT u.username, l.score 
 								FROM leaderboard l
 								INNER JOIN user u ON l.user_id = u.id
 								ORDER BY l.score DESC LIMIT 10";
@@ -82,7 +83,7 @@
 						echo "<div class='column'><h3>Score</h3></div>";
 
 						foreach ($topScores as $score) {
-							echo "<div class='column'>" . $score['First_Name'] . $score['score'] . "</div>";
+							echo "<div class='column'>" . $score['username'] . $score['score'] . "</div>";
 							echo "<br>";
 						}
 						
