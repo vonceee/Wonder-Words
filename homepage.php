@@ -27,6 +27,14 @@
 		
 		<button class="btn1" id="howToPlayBtn"><b>How to Play</b></button>
 
+		<!-- Overlay -->
+		<div id="modalOverlay" class="overlay"></div>
+
+		<button class="btn1" id="leaderboardsBtn"><b>Leaderboards</b></button>
+		<button class="btn1" onclick="toggleMusic()"><b>Toggle Music</b></button>
+		<br><br>
+		<a href="#" id="logoutBtn"><button class="btn1"><b>Logout</b></button></a>
+
 		<!-- The Modal -->
 		<div id="howToPlayModal" class="modal">
 		  <!-- Modal Content -->
@@ -41,12 +49,76 @@
 		  </div>
 		</div>
 
-		<!-- Overlay -->
-		<div id="modalOverlay" class="overlay"></div>
+		<!-- The Modal -->
+		<div id="leaderboardsModal" class="modal">
+			<!-- Modal Content -->
+			<div class="modal-content">
+				<span id="closeLeaderboardsModalBtn">&times;</span>
+				<!-- Add your leaderboards content here -->
+				<h2 style="text-align: center;">LEADERBOARDS</h2>
+					<?php
+						// Include the database connection file
+						include_once "database.php";
 
-		
-		<button class="btn1" onclick="toggleMusic()"><b>Toggle Music</b></button>
-	
+						// Write the SQL query to select the top 10 highest scores with user's First_Name
+						$sql = "SELECT u.First_Name, l.score 
+								FROM leaderboard l
+								INNER JOIN user u ON l.user_id = u.id
+								ORDER BY l.score DESC LIMIT 10";
+
+						// Prepare and execute the query
+						$stmt = $conn->prepare($sql);
+						$stmt->execute();
+
+						// Get the result set
+						$result = $stmt->get_result();
+
+						// Fetch the results as an associative array
+						$topScores = $result->fetch_all(MYSQLI_ASSOC);
+
+						// Display the results in two columns
+						echo "<div class='leaderboard-columns'>";
+						echo "<div class='column'><h3>Username</h3></div>";
+						echo "<div class='column'><h3>Score</h3></div>";
+
+						foreach ($topScores as $score) {
+							echo "<div class='column'>" . $score['First_Name'] . $score['score'] . "</div>";
+							echo "<br>";
+						}
+						
+						echo "</div>"; // Close leaderboard-columns div
+
+						// Close the statement
+						$stmt->close();
+
+						// Close the database connection
+						$conn->close();
+					?>
+			</div>
+		</div>
+
+		<!-- The Modal for Logout Confirmation -->
+		<div id="logoutModal" class="modal">
+			<!-- Modal Content -->
+			<div class="modal-content">
+				<h2 style="text-align: center;">Logout Confirmation</h2>
+				<p style="text-align: center;">Are you sure you want to logout?</p>
+				<a href="logout.php"><button class="btn1" id="confirmLogoutBtn"><b>Yes</b></button></a>
+				<button class="btn1" id="cancelLogoutBtn"><b>Cancel</b></button>
+			</div>
+		</div>
+
+		<!-- The Modal for Login/Register -->
+		<div id="loginModal" class="modal">
+			<!-- Modal Content -->
+			<div class="modal-content">
+				<span id="closeModalBtn">&times;</span>
+				<h2 style="text-align: center;">Not Logged In!</h2>
+				<p style="text-align: center;">Make sure to login/register first.</p>
+				<a href="login.php"><button class="btn1" id="loginBtn"><b>Login</b></button></a>
+				<a href="login.php"><button class="btn1" id="logoutBtn"><b>Register</b></button></a>
+			</div>
+		</div>
 	</div>
 
 	<!-- Right Box Layout -->
@@ -60,7 +132,7 @@
 	<audio id="buttonPress" src="./assets/buttonPress.mp3"  preload="auto"></audio>
 	<audio id="gameMusic" src="./assets/homepageBackground.mp3" autoplay loop preload="auto"></audio>
 
-	<script src="myscript.js"></script>
+	<script src="homepage_script.js"></script>
 	
 </body>
 </html>

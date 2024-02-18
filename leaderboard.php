@@ -28,15 +28,8 @@ $topScores = $result->fetch_all(MYSQLI_ASSOC);
 // Display the results
 echo "<h2>Top 10 Highest Scores</h2>";
 echo "<ul>";
-$rank = 1;
 foreach ($topScores as $score) {
-    echo "<li>";
-    if ($rank === 1) {
-        echo "<span>&#x1F451;</span>"; // Crown icon
-    }
-    echo "User Name: " . $score['First_Name'] . ", Score: " . $score['score'];
-    echo "</li>";
-    $rank++; 
+    echo "<li>User Name: " . $score['First_Name'] . ", Score: " . $score['score'] . "</li>";
 }
 echo "</ul>";
 

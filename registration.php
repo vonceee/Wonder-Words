@@ -18,7 +18,6 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        
         <div class="container">
             <?php
             if(isset($_POST["submit"])){
@@ -34,7 +33,6 @@
 
             if (empty($LastName) OR empty($FirstName) OR empty($email) OR empty($password) OR empty($RepeatPassword)) {
                 array_push($errors, "All fields are required");
-                print_r($POST);
             }
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {

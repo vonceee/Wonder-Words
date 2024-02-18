@@ -2,7 +2,7 @@
 <?php
     session_start();
     if(isset($_SESSION["user"])){
-        header("Location: index.php");
+        header("Location: homepage.php");
     }
 ?>
 
@@ -36,7 +36,7 @@
                         // Gets the user?
                         $_SESSION["user"]=$user;
                         
-                        header("Location: index.php");
+                        header("Location: homepage.php");
                         die();
                     } else {
                         echo "<div class='alert alert-danger'> Password does not match</div>";

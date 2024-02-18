@@ -6,19 +6,17 @@
     include_once "database.php";
 
     // Check if user data exists in the session
-    if(isset($_SESSION["user"])) {
-        // Retrieve the user's first name from the session
-        $firstName = $_SESSION["user"]["First_Name"]; // Check the session key and structure
+    if(!isset($_SESSION["user"])) {
+    //     // Retrieve the user's first name from the session
+    //     $firstName = $_SESSION["user"]["First_Name"]; // Check the session key and structure
         
-        // Retrieve the user's ID from the session
-        // $userId = $_SESSION["user"]["id"];
-    } else {
-        // Redirect the user to the login page if session data is not available
+    //     // Retrieve the user's ID from the session
+    //     // $userId = $_SESSION["user"]["id"];
+    // } else {
+    //     // Redirect the user to the login page if session data is not available
         header("Location: login.php");
-        exit(); // Terminate script execution
     }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
