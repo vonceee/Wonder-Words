@@ -84,11 +84,27 @@
 	}
 	
 	/* --resetgameModal--! */
+
+    /* --logingameModal--! */
+
+    function showLoginConfirmationPopup() {
+		document.getElementById('login-alert-box').style.display = 'block';
+		document.getElementById('overlay').style.display = 'block';
+		playAudioById("buttonPress");
+	}
+
+    function hideLoginConfirmationPopup() {
+		document.getElementById('login-alert-box').style.display = 'none';
+		document.getElementById('overlay').style.display = 'none';
+		playAudioById("buttonPress");
+	}
+    
+    /* --logingameModal--! */
 	
 	/* !--keyboard-- */
 	document.addEventListener('keydown', function(event) { // From keyup turned to keydown to fix shortcut reload bug
 	  // Define the IDs of the overlays
-	  var overlayIds = ['clueModal', 'custom-alert-box', 'reset-alert-box'];
+	  var overlayIds = ['clueModal', 'custom-alert-box', 'reset-alert-box', 'login-alert-box'];
 
 	  
       // Check if any of the overlays are visible
@@ -530,10 +546,22 @@
     
             // Delay redirection by 500 milliseconds (0.5 seconds)
             setTimeout(function() {
-                window.location.href = "homepage.php"; // Redirect to index.html
+                window.location.href = "index.php"; // Redirect to index.html
             }, 100);
         }
     }
+
+    function redirectToLogin() {
+        // Redirect to the PHP file
+        window.location.href = "login.php";
+    }
+
+    function redirectToRegistration() {
+        // Redirect to the PHP file
+        window.location.href = "registration.php";
+    }
+
+    
     
 
     initGame();

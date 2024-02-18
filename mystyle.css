@@ -373,6 +373,26 @@
 		margin-top: 2px;
 	}
 
+	#login-alert-box {
+		position: fixed;
+		display: none;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 20px;
+		background-image: linear-gradient(to bottom right, bisque, burlywood);
+		border: 8px solid brown;
+		z-index: 9999;
+		width: 600px;
+		text-align: center;
+	}
+	
+	#login-alert-box button{
+		box-sizing: border-box;
+		width: calc(33.33% - 8px);
+		margin: 0 auto;
+	}
+
 	/* inefficent way of making clue button disabled. Find better implementation of button disabling */
 	.modalClueButtons:disabled {
 		background-color: gray;

@@ -1,10 +1,3 @@
-<?php
-    session_start();
-    if(!isset($_SESSION["user"])){
-        header("Location: login.php");
-    }
-?>  
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +20,7 @@
 	<div class="menuBox">
 	
 		<div class="Panel">
-			<a id="backBtn" href="homepage.php">
+			<a id="backBtn" href="index.php">
 				<img src="./assets/exit.png" title="Go Back">
 			</a>
 		</div>
@@ -89,6 +82,12 @@
     <button onclick="hideResetConfirmationPopup()">Cancel</button>
 </div>
 
+<div id="login-alert-box">
+    <div id="reset-alert-content">You are not logged in yet, please login to save your score!<br><br><br><br><br></div>
+    <button onclick="redirectToLogin(), hideLoginConfirmationPopup()">Login</button>
+    <button onclick="redirectToRegistration(), hideLoginConfirmationPopup()">Register</button>
+</div>
+
 <footer>Mendoza | Ranola | Sibucao | Marcos | De Francia</footer>
 
 <audio id="buttonPress" src="./assets/buttonPress.mp3"></audio>
@@ -102,6 +101,13 @@
 <audio id="goBackSound" src="./assets/goBack.mp3"></audio>
 
 <script src="myscript_game.js"></script>
+<?php
+    session_start();
+    if(!isset($_SESSION["user"])){
+        echo '<script>showLoginConfirmationPopup();</script>';
+    }
+?>
+
 
 </body>
 </html>
