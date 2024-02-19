@@ -12,7 +12,7 @@ if(isset($_POST["login"])){
         if (password_verify($password, $user["password"])) {
             // Sets the user session
             $_SESSION["user"] = $user;
-            header("Location: index.php");
+            header("Location: game.php");
             exit(); // Stop script execution after redirect
         } else {
             echo "<div class='alert alert-danger'>Password does not match</div>";
