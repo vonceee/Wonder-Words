@@ -88,22 +88,28 @@
     ?>
             <form action="registration.php" method="post">
                 <div class="form-group">
-                <input type="text" class="form-control" name="LastName" placeholder="LastName">
+                    <label for="LastName">LastName:</label>
+                <input type="text" class="form-control" name="LastName" >
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="FirstName" placeholder="FirstName">
+                    <label for="FirstName">FirstName:</label>
+                    <input type="text" class="form-control" name="FirstName" >
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="username" placeholder="Username">
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" name="username" >
                 </div>
                 <div class="form-group">
-                    <input type="email" class="form-control" name="email" placeholder="Email">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" name="email" >
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="password" placeholder="Input Password: ">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" name="password" >
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" name="repeat_password" placeholder="Repeat Password: ">
+                    <label for="repeat_password">Confirm Passowrd:</label>
+                    <input type="password" class="form-control" name="repeat_password" >
                 </div>
                 <div class="form-group">
                     <input type="submit" name="submit" class="btn btn-primary" value="Register" placeholder="submit">

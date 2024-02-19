@@ -2,6 +2,16 @@
 		font-family: pixel;
 		src: url(assets/pixel.ttf);
 	}
+
+	#usernameText{
+		float: right;
+		padding-right: 2%;
+		margin-top: 0.1%;
+		color: bisque;
+		text-shadow: 2px 2px brown;
+		;
+
+	}
 	
 	body {		
 		margin:0;
@@ -41,6 +51,7 @@
 	
 	#title {
 		height: 50vh;
+		margin-top: 1px;
 	}
 
 	button {
@@ -158,7 +169,7 @@
 	.titleBox {
 		float: left;
 		width: 70%;
-		height: 90vh;
+		height: 50vh;
 		
 		display: flex;
 		justify-content: center;

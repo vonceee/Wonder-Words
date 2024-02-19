@@ -13,10 +13,18 @@
 </head>
 
 <body>
-	
+	<!-- UsernameText -->
+	<?php
+       if(isset($_SESSION["user"]["username"])) {
+			$username = $_SESSION["user"]["username"];
+            echo '<h1 id="usernameText">' . $username . '</h1>';
+        }?>	
+	<!-- UsernameText -->
+
 	<!-- Left Box Layout -->
 	<div class="menuBox">
 			
+		
 		<button class="btn1" id="playBtn"><b>Play</b></button>
 		
 		<button class="btn1" id="howToPlayBtn"><b>How to Play</b></button>
@@ -31,7 +39,7 @@
 		<!-- Only Appear if User is Logged In -->
 		<?php
         if(isset($_SESSION["user"])){
-            echo '<button id="logoutBtn" class="btn1"><b>Logout</b></button>'; //change to button for consistent design
+            echo '<button id="logoutBtn" class="btn1"><b>Logout</b></button>';
         }?>	
 		<!-- Only Appear if User is Logged In -->
 
@@ -136,7 +144,7 @@
 	
 	
 	<audio id="buttonPress" src="./assets/buttonPress.mp3"  preload="auto"></audio>
-	<audio id="gameMusic" src="./assets/homepageBackground.mp3" autoplay loop preload="auto"></audio>
+	<audio id="gameMusic" src="./assets/homepageBackground.mp3" autoplay loop></audio>
 
 	<script src="homepage_script.js"></script>
 	

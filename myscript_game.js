@@ -1,4 +1,4 @@
-    let totalPoints = 100;
+    let totalPoints = 0;
     let incorrectGuesses = 0;
     let currentRound = 0;
     let currentWord = "";
@@ -270,17 +270,41 @@
     }
 
     let easyWords = [
-
+        { word: "APPLE", question: "A fruit often associated with teachers." },
+        { word: "BANANA", question: "A yellow fruit with a peel." },
+        { word: "ORANGE", question: "A citrus fruit with a tough outer layer." },
+        { word: "APOLLO", question: "Who was the ancient greek god of sun." },
+        { word: "HANGAROO", question: "A word-guessing game with a kangaroo theme." },
+        { word: "GIRAFFE", question: "A long-necked mammal found in Africa." },
+        { word: "ELEPHANT", question: "A large land mammal known for its tusks." },
+        { word: "C", question: "Programmer's favorite note." },
+        { word: "COFFEE", question: "A popular caffeinated beverage." },
         { word: "ZEUS", question: "Who was the ancient greek god of lightning." }
     ];
 
     let moderateWords = [
-        
+        { word: "PROGRAMMING", question: "The process of writing code for software development." },
+        { word: "ALGORITHM", question: "A set of instructions or rules for solving a problem." },
+        { word: "DATABASE", question: "A structured collection of data." },
+        { word: "NETWORK", question: "A system of interconnected computers or devices." },
+        { word: "JAVASCRIPT", question: "A scripting language used for web development." },
+        { word: "PYTHON", question: "A versatile programming language." },
+        { word: "JAVA", question: "A popular object-oriented programming language." },
+        { word: "HTML", question: "A markup language for creating web pages." },
+        { word: "CSS", question: "A style sheet language for designing web pages." },
         { word: "CLOUD", question: "A network of remote servers for storing and managing data." }
     ];
 
     let difficultWords = [
-        
+        { word: "CYBERSECURITY", question: "The practice of protecting computer systems and networks from digital attacks." },
+        { word: "BLOCKCHAIN", question: "A decentralized and distributed ledger technology." },
+        { word: "MACHINELEARNING", question: "A subset of artificial intelligence that enables machines to learn from data." },
+        { word: "ARTIFICIALINTELLIGENCE", question: "The simulation of human intelligence in machines." },
+        { word: "WEBDEVELOPMENT", question: "The process of building and maintaining websites." },
+        { word: "DATASCIENCE", question: "The extraction of knowledge and insights from structured and unstructured data." },
+        { word: "FRONTEND", question: "The part of a website that users interact with directly." },
+        { word: "BACKEND", question: "The server-side of a website, responsible for processing requests." },
+        { word: "VIRTUALIZATION", question: "The creation of a virtual version of a resource, such as an operating system or server." },
         { word: "DOCKER", question: "A platform for developing, shipping, and running applications in containers." }
     ];
 

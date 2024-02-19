@@ -1,6 +1,9 @@
 <?php
     // Start the session
     session_start();
+        if(isset($_SESSION["user"])){
+            header("Location: game.php");
+        }
 
     // Check if the login form is submitted
     if(isset($_POST["login"])){
@@ -34,11 +37,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WonderWords Login</title>
+  
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
   <link rel="icon" href="./assets/points.png">
   <link rel="stylesheet" href="login.css">
+ 
 </head>
 <body>
 
@@ -66,6 +71,6 @@
         </form>
         <div><br><p>Not Registered yet? <a href="registration.php">Register Here</a></div>  
     </div>
-    <footer>Mendoza | Ranola | Sibucao | Marcos | De Francia</footer>
+    <footer>Mendoza | Rañola | Sibucao | Marcos | De Francia</footer>
 </body>
 </html>

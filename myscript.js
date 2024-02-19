@@ -51,24 +51,5 @@
 	}
 	
 	/* --buttonPress-- */
-	document.addEventListener('DOMContentLoaded', function() {
-	  var audioElement = document.getElementById("buttonPress");
-	  var parentElement = document.body; // Or another container element
-
-	  parentElement.addEventListener('click', function(event) {
-		// Check if the clicked element or its parent has the 'sound-trigger' class
-		if (event.target.matches('.btn1') || event.target.parentNode.matches('.btn1')) {
-		  // Check if the audio is already playing
-		  if (!audioElement.paused && !audioElement.ended) {
-			// Audio is currently playing, ignore the click or wait
-			return;
-		  }
-
-		  // Reset the audio to the start before playing
-		  audioElement.currentTime =   0;
-		  audioElement.play();
-		}
-	  });
-	});
 
 	/* --audio--! */
