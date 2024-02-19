@@ -31,7 +31,7 @@
 		<!-- Only Appear if User is Logged In -->
 		<?php
         if(isset($_SESSION["user"])){
-            echo '<a href="#" id="logoutBtn"><button class="btn1"><b>Logout</b></button></a>';
+            echo '<button id="logoutBtn" class="btn1"><b>Logout</b></button>'; //change to button for consistent design
         }?>	
 		<!-- Only Appear if User is Logged In -->
 
