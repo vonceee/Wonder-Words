@@ -1,110 +1,144 @@
-<?php
-    session_start();
-    if(isset($_SESSION["user"])){
-        header("Location: index.php");
-    }
-?>
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        
-        <meta charset="UTF-8">
-        <meta name ="viewport" content ="width-device-width, initial-scale=1.0">
-        <title>WonderWords Register</title>
-        <link rel="icon" href="./assets/points.png">
-        <link rel="stylesheet" href="register.css">
-    </head>
-    <body>
-        
-        <div class="container">
-            <?php
-            if(isset($_POST["submit"])){
-                $LastName = $_POST["LastName"];
-                $FirstName = $_POST["FirstName"];
-                $email = $_POST["email"];
-                $username = $_POST["username"];
-                $password = $_POST["password"];
-                $RepeatPassword = $_POST["repeat_password"];
-                
-                $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-                $errors = array();
-            
 
-            if (empty($LastName) OR empty($FirstName) OR empty($email) OR empty($password) OR empty($RepeatPassword)) {
-                array_push($errors, "All fields are required");
-                print_r($POST);
-            }
+<head>
+	
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wonder Words</title>
+	<link rel="icon" href="./assets/points.png">
+	<link rel="stylesheet" href="mystyle.css">
 
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                array_push($errors, "Email is not valid");
+</head>
 
-            }
+<body>
+	
+	<!-- Left Box Layout -->
+	<div class="menuBox">
+			
+		<button class="btn1" id="playBtn"><b>Play</b></button>
+		
+		<button class="btn1" id="howToPlayBtn"><b>How to Play</b></button>
 
-            if (strlen($password)<8) {
-                array_push ($errors, "Password must be at least 8 characters long");
-            
-            }
+		<!-- Overlay -->
+		<div id="modalOverlay" class="overlay"></div>
 
-            if($password!=$RepeatPassword){
-                array_push($errors, "Password does not match");
-            }
-            require_once "database.php";
-            $sql="SELECT * FROM user WHERE username='$username'"; // Username edit from email
-            $result=mysqli_query($conn, $sql);
-            $rowCount=mysqli_num_rows($result);
-            if ($rowCount>0) {
-                array_push($errors, "Username Already Exist"); // Username edit
-            }
-            
-            if (count($errors)>0){
-                foreach ($errors as $error) {
-                    echo"<div class='alert alert-danger'>$error</div>";
-                }
-            } else {
-                require_once "database.php";
-                $sql = "INSERT INTO user (Last_Name, First_Name, email, password, username) VALUES (?, ?, ?, ?, ?)";
-                $stmt = mysqli_stmt_init($conn);
-                $preparestmt = mysqli_stmt_prepare($stmt, $sql);
-                if ($preparestmt) {
-                    mysqli_stmt_bind_param($stmt, "sssss", $LastName, $FirstName, $email, $passwordHash, $username);
-                    mysqli_stmt_execute($stmt);
-                    echo "<div class='alert alert-success'> You are Registered Successfully! </div>";
-                } else {
-                    die("Something went wrong");
-                }
-            }            
-        }   
-    ?>
-            <form action="registration.php" method="post">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="LastName" placeholder="LastName">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="FirstName" placeholder="FirstName">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="username" placeholder="Username">
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control" name="email" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="password" placeholder="Input Password: ">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" name="repeat_password" placeholder="Repeat Password: ">
-                </div>
-                <div class="form-group">
-                    <input type="submit" name="submit" class="btn btn-primary" value="Register" placeholder="submit">
-                </div>
-            </form>
-            <div><p>Already registered? <a href="login.php">Login Here</a></div>  
-        </div>
+		<button class="btn1" id="leaderboardsBtn"><b>Leaderboards</b></button>
+		<button class="btn1" onclick="toggleMusic()"><b>Toggle Music</b></button>
+		<br><br>
+		
+		<!-- Only Appear if User is Logged In -->
+		<?php
+        if(isset($_SESSION["user"])){
+            echo '<a href="#" id="logoutBtn"><button class="btn1"><b>Logout</b></button></a>';
+        }?>	
+		<!-- Only Appear if User is Logged In -->
 
-        <script src="script.js" name="Register" placeholder="submit ">
-    </body>
-    </html>
+		<!-- The Modal -->
+		<div id="howToPlayModal" class="modal">
+		  <!-- Modal Content -->
+		  <div class="modal-content">
+			<span id="closeModalBtn">&times;</span>
+			<h2 style="text-align: center;">HOW TO PLAY</h2>
+			<p style="text-align: justify;"><b>
+			CATEGORIES:<br><br>There are 3 categories <span style="color: green;">Easy</span>, <span style="color: orange;">Moderate</span>, and <span style="color: red;">Difficult</span> categories, each with 10 questions. Answer by selecting letters to form the correct answer.<br><br>
+			POINTS:<br><br>Earn <span style="color: green;">10 points</span> for each correct answer. Spend points <span style="color: blue;">(25 each) on clues</span> - choose between vowel or consonant clues. You have <span style="color: blue;">3 clues</span> for the entire game.<br><br>
+			STRIKES:<br><br>You have 3 chances. <span style="color: red;">Three wrong guesses</span> and you lose.<br><br>
+			<h2 style="text-align: center;">Good Luck!<h2></b></p>
+		  </div>
+		</div>
+
+		<!-- The Modal -->
+		<div id="leaderboardsModal" class="modal">
+			<!-- Modal Content -->
+			<div class="modal-content">
+				<span id="closeLeaderboardsModalBtn">&times;</span>
+				<!-- Add your leaderboards content here -->
+				<h2 style="text-align: center;">LEADERBOARDS</h2>
+					<?php
+						// Include the database connection file
+						include_once "database.php";
+
+						// Write the SQL query to select the top 10 highest scores with user's First_Name
+						// Sun, 18 Feb 2024 16:27:01 GMT from user's First_Name turned to username
+						$sql = "SELECT u.username, l.score 
+								FROM leaderboard l
+								INNER JOIN user u ON l.user_id = u.id
+								ORDER BY l.score DESC LIMIT 10";
+
+						// Prepare and execute the query
+						$stmt = $conn->prepare($sql);
+						$stmt->execute();
+
+						// Get the result set
+						$result = $stmt->get_result();
+
+						// Fetch the results as an associative array
+						$topScores = $result->fetch_all(MYSQLI_ASSOC);
+
+						// Display the results in two columns
+						echo "<div class='leaderboard-columns'>";
+						echo "<div class='column'><h3>Username</h3></div>";
+						echo "<div class='column'><h3>Score</h3></div>";
+						$rank = 1;
+
+						foreach ($topScores as $score) {
+							if ($rank === 1) {
+								echo "<span>&#x1F451;</span>"; // Crown icon
+							}
+							echo "<div class='column'>" . $score['username'] . " " . $score['score'] . "</div>";
+							echo "<br>";
+							$rank++; 
+						}
+						
+						echo "</div>"; // Close leaderboard-columns div
+
+						// Close the statement
+						$stmt->close();
+
+						// Close the database connection
+						$conn->close();
+					?>
+			</div>
+		</div>
+
+		<!-- The Modal for Logout Confirmation -->
+		<div id="logoutModal" class="modal">
+			<!-- Modal Content -->
+			<div class="modal-content">
+				<h2 style="text-align: center;">Logout Confirmation</h2>
+				<p style="text-align: center;">Are you sure you want to logout?</p>
+				<a href="logout.php"><button class="btn1" id="confirmLogoutBtn"><b>Yes</b></button></a>
+				<button class="btn1" id="cancelLogoutBtn"><b>Cancel</b></button>
+			</div>
+		</div>
+
+		<!-- The Modal for Login/Register -->
+		<div id="loginModal" class="modal">
+			<!-- Modal Content -->
+			<div class="modal-content">
+				<span id="closeModalBtn">&times;</span>
+				<h2 style="text-align: center;">Not Logged In!</h2>
+				<p style="text-align: center;">Make sure to login/register first.</p>
+				<a href="login.php"><button class="btn1" id="loginBtn"><b>Login</b></button></a>
+				<a href="login.php"><button class="btn1" id="logoutBtn"><b>Register</b></button></a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Right Box Layout -->
+    <div class="titleBox">
+		<img id="title" src="./assets/title.png">
+	</div> 
+	
+	<footer>Mendoza | Rañola | Sibucao | Marcos | De Francia</footer>
+	
+	
+	<audio id="buttonPress" src="./assets/buttonPress.mp3"  preload="auto"></audio>
+	<audio id="gameMusic" src="./assets/homepageBackground.mp3" autoplay loop preload="auto"></audio>
+
+	<script src="homepage_script.js"></script>
+	
+</body>
+</html>
