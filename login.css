@@ -27,12 +27,12 @@ footer {
     
     bottom: 0;
     width: 100%;
-    height: 2vh;
+    height: 6vh;
     
     background-color: bisque; 
     text-align: center;
     
-    padding: 2vh;
+    padding: 1vh;
 }
 
 input[type=submit] {
