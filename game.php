@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,7 +103,6 @@
 
 <script src="myscript_game.js"></script>
 <?php
-    session_start();
     if(!isset($_SESSION["user"])){
         echo '<script>showLoginConfirmationPopup();</script>';
 		
