@@ -2,6 +2,7 @@
 	document.addEventListener('DOMContentLoaded', function() {
 		var playButton = document.getElementById('playBtn');
 		playButton.addEventListener('click', function() {
+			playAudioById();
 			window.location.href = 'game.php';
 		});
 	});
@@ -21,12 +22,14 @@
 
 	// When the user clicks the button, open the modal  
 	btn.onclick = function() {
+	  playAudioById();
 	  modal.style.display = "block";
 	  document.getElementById('modalOverlay').style.display = "block";
 	}
 
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
+	  playAudioById();
 	  modal.style.display = "none";
 	  document.getElementById('modalOverlay').style.display = "none";
 	}
@@ -54,6 +57,7 @@
 
 	// Function to display the modal
 	function openModal() {
+		playAudioById();
 		leaderboardsModal.style.display = "block";
 		document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
 	}
@@ -85,6 +89,7 @@
 
 	// When the user clicks the logout button, open the logout confirmation modal  
 	logoutBtn.onclick = function() {
+		playAudioById();
 		logoutModal.style.display = "block";
 		document.getElementById('modalOverlay').style.display = "block";
 	}
@@ -92,11 +97,13 @@
 	// When the user clicks on <span> (x) or Cancel, close the logout confirmation modal
 	var closeLogoutModalBtn = document.getElementById("closeLogoutModalBtn");
 	closeLogoutModalBtn.onclick = cancelLogoutBtn.onclick = function() {
+		playAudioById();
 		logoutModal.style.display = "none";
 		document.getElementById('modalOverlay').style.display = "none";
 	}
 	
 	function toggleMusic() {
+	  playAudioById();
 	  var audioElement = document.getElementById("gameMusic");
 	  if (audioElement.paused) {
 		audioElement.play();
@@ -106,24 +113,15 @@
 	}
 	
 	/* --buttonPress-- */
-	document.addEventListener('DOMContentLoaded', function() {
-	  var audioElement = document.getElementById("buttonPress");
-	  var parentElement = document.body; // Or another container element
+	function playAudioById() {
+		let audio = document.getElementById("buttonPress");
 
-	  parentElement.addEventListener('click', function(event) {
-		// Check if the clicked element or its parent has the 'sound-trigger' class
-		if (event.target.matches('.btn1') || event.target.parentNode.matches('.btn1')) {
-		  // Check if the audio is already playing
-		  if (!audioElement.paused && !audioElement.ended) {
-			// Audio is currently playing, ignore the click or wait
-			return;
-		  }
-
-		  // Reset the audio to the start before playing
-		  audioElement.currentTime =   0;
-		  audioElement.play();
+		if (audio) {
+			audio.currentTime =  0;
+			audio.volume =  0.5;
+			audio.play();
+		} else {
+			console.error(`Audio element with ID not found.`);
 		}
-	  });
-	});
-
+	}
 	/* --audio--! */
