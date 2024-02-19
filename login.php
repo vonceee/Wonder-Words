@@ -1,3 +1,8 @@
+<?php session_start(); 
+    if(isset($_SESSION["user"])){
+        header("Location: game.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,29 +20,27 @@
 </body>
     <div class = "container">
     <?php
-session_start();
-
-if(isset($_POST["login"])){
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    require_once "database.php";
-    $sql = "SELECT * FROM user WHERE email='$email'";
-    $result = mysqli_query($conn, $sql);
-    $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
-    if ($user) {
-        if (password_verify($password, $user["password"])) {
-            // Sets the user session
-            $_SESSION["user"] = $user;
-            header("Location: game.php");
-            exit(); // Stop script execution after redirect
+        if(isset($_POST["login"])){
+            $email = $_POST["email"];
+            $password = $_POST["password"];
+            require_once "database.php";
+            $sql = "SELECT * FROM user WHERE email='$email'";
+            $result = mysqli_query($conn, $sql);
+            $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            if ($user) {
+                if (password_verify($password, $user["password"])) {
+                    // Sets the user session
+                    $_SESSION["user"] = $user;
+                    header("Location: game.php");
+                    exit(); // Stop script execution after redirect
+                } else {
+                    echo "<div class='alert alert-danger'>Password does not match</div>";
+                }
         } else {
-            echo "<div class='alert alert-danger'>Password does not match</div>";
+            echo "<div class='alert alert-danger'>Email does not match</div>";
         }
-    } else {
-        echo "<div class='alert alert-danger'>Email does not match</div>";
     }
-}
-?>
+    ?>
         <form action="login.php" method="post">
                         <div class="form-group">
                             <label for="email">Email:</label>
@@ -55,7 +58,6 @@ if(isset($_POST["login"])){
         </form>
         <div><br><p>Not Registered yet? <a href="registration.php">Register Here</a></div>  
     </div>
-
     <footer>Mendoza | Ranola | Sibucao | Marcos | De Francia</footer>
 </body>
 </html>

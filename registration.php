@@ -1,7 +1,6 @@
-<?php
-    session_start();
+<?php session_start(); 
     if(isset($_SESSION["user"])){
-        header("Location: index.php");
+        header("Location: game.php");
     }
 ?>
 
@@ -36,7 +35,7 @@
 
             if (empty($LastName) OR empty($FirstName) OR empty($email) OR empty($password) OR empty($RepeatPassword)) {
                 array_push($errors, "All fields are required");
-                
+
             }
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -58,6 +57,14 @@
             $rowCount=mysqli_num_rows($result);
             if ($rowCount>0) {
                 array_push($errors, "Username Already Exist"); // Username edit
+            }
+
+            // Check if email already exists BAD CODE
+            $sql1="SELECT * FROM user WHERE email='$email'"; // Username edit from email
+            $result1=mysqli_query($conn, $sql1);
+            $rowCount1=mysqli_num_rows($result1);
+            if ($rowCount1>0) {
+                array_push($errors, "Email Already Exist"); // Username edit
             }
             
             if (count($errors)>0){
