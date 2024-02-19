@@ -17,7 +17,7 @@
 	<?php
        if(isset($_SESSION["user"]["username"])) {
 			$username = $_SESSION["user"]["username"];
-            echo '<h1 id="usernameText">' . $username . '</h1>';
+            echo '<h4 id="usernameText">Hi! ' . $username . '</h4>';
         }?>	
 	<!-- UsernameText -->
 
@@ -58,58 +58,69 @@
 		</div>
 
 		<!-- The Modal -->
-		<div id="leaderboardsModal" class="modal">
-			<!-- Modal Content -->
-			<div class="modal-content">
-				<span id="closeLeaderboardsModalBtn">&times;</span>
-				<!-- Add your leaderboards content here -->
-				<h2 style="text-align: center;">LEADERBOARDS</h2>
-					<?php
-						// Include the database connection file
-						include_once "database.php";
-
-						// Write the SQL query to select the top 10 highest scores with user's First_Name
-						// Sun, 18 Feb 2024 16:27:01 GMT from user's First_Name turned to username
-						$sql = "SELECT u.username, l.score 
-								FROM leaderboard l
-								INNER JOIN user u ON l.user_id = u.id
-								ORDER BY l.score DESC LIMIT 10";
-
-						// Prepare and execute the query
-						$stmt = $conn->prepare($sql);
-						$stmt->execute();
-
-						// Get the result set
-						$result = $stmt->get_result();
-
-						// Fetch the results as an associative array
-						$topScores = $result->fetch_all(MYSQLI_ASSOC);
-
-						// Display the results in two columns
-						echo "<div class='leaderboard-columns'>";
-						echo "<div class='column'><h3>Username</h3></div>";
-						echo "<div class='column'><h3>Score</h3></div>";
-						$rank = 1;
-
-						foreach ($topScores as $score) {
-							if ($rank === 1) {
-								echo "<span>&#x1F451;</span>"; // Crown icon
-							}
-							echo "<div class='column'>" . $score['username'] . " " . $score['score'] . "</div>";
-							echo "<br>";
-							$rank++; 
-						}
-						
-						echo "</div>"; // Close leaderboard-columns div
-
-						// Close the statement
-						$stmt->close();
-
-						// Close the database connection
-						$conn->close();
-					?>
-			</div>
-		</div>
+        <div id="leaderboardsModal" class="modal">
+            <!-- Modal Content -->
+            <div class="modal-content">
+                <span id="closeLeaderboardsModalBtn">&times;</span>
+                <!-- Add your leaderboards content here -->
+                <h2 style="text-align: center;">LEADERBOARDS</h2>
+                
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Username</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Include the database connection file
+                        include_once "database.php";
+        
+                        // Write the SQL query to select the top 10 highest scores with user's First_Name
+                        $sql = "SELECT u.username, l.score 
+                                FROM leaderboard l
+                                INNER JOIN user u ON l.user_id = u.id
+                                ORDER BY l.score DESC LIMIT 10";
+        
+                        // Prepare and execute the query
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+        
+                        // Get the result set
+                        $result = $stmt->get_result();
+        
+                        // Fetch the results as an associative array
+                        $topScores = $result->fetch_all(MYSQLI_ASSOC);
+        
+                        // Display the results in a table
+                        $rank = 1;
+                        foreach ($topScores as $score) {
+                            echo "<tr>";
+                            echo "<td>" . $rank . "</td>";
+                            
+                            if ($rank === 1) {
+                                echo "<td>" . "<span>&#x1F451;</span>" . " " . $score['username'] . "</td>";
+                            } else {
+                                echo "<td>" . $score['username'] . "</td>";
+                            }
+                            
+                            echo "<td>" . $score['score'] . "</td>";
+                            echo "</tr>";
+                            $rank++;
+                        }
+        
+                        // Close the statement
+                        $stmt->close();
+        
+                        // Close the database connection
+                        $conn->close();
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
 		<!-- The Modal for Logout Confirmation -->
 		<div id="logoutModal" class="modal">
@@ -143,8 +154,8 @@
 	<footer>Mendoza | Rañola | Sibucao | Marcos | De Francia</footer>
 	
 	
-	<audio id="buttonPress" src="./assets/buttonPress.mp3"  preload="auto"></audio>
-	<audio id="gameMusic" src="./assets/homepageBackground.mp3" autoplay loop></audio>
+	<audio id="buttonPress" src="./assets/buttonPress.mp3"></audio>
+	<audio id="gameMusic" src="./assets/homepageBackground.mp3" autoplay loop preload="auto"></audio>
 
 	<script src="homepage_script.js"></script>
 	
