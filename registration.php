@@ -14,8 +14,9 @@
         
         <meta charset="UTF-8">
         <meta name ="viewport" content ="width-device-width, initial-scale=1.0">
-        <title>Registration From</title>
-        <link rel="stylesheet" href="style.css">
+        <title>WonderWords Register</title>
+        <link rel="icon" href="./assets/points.png">
+        <link rel="stylesheet" href="register.css">
     </head>
     <body>
         
@@ -35,7 +36,7 @@
 
             if (empty($LastName) OR empty($FirstName) OR empty($email) OR empty($password) OR empty($RepeatPassword)) {
                 array_push($errors, "All fields are required");
-                print_r($POST);
+                
             }
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -80,7 +81,7 @@
     ?>
             <form action="registration.php" method="post">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="LastName" placeholder="LastName">
+                <input type="text" class="form-control" name="LastName" placeholder="LastName">
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" name="FirstName" placeholder="FirstName">
@@ -101,9 +102,11 @@
                     <input type="submit" name="submit" class="btn btn-primary" value="Register" placeholder="submit">
                 </div>
             </form>
-            <div><p>Already registered?<a href="login.php">Login Here</a></div>  
+            <div><p>Already registered? <a href="login.php">Login Here</a></div>  
         </div>
 
+        <footer>Mendoza | Ranola | Sibucao | Marcos | De Francia</footer>
+
         <script src="script.js" name="Register" placeholder="submit ">
-    </body>
-    </html>
+</body>
+</html>
