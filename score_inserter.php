@@ -16,7 +16,7 @@ if (isset($_SESSION["user"]["id"])) {
         $score = $_POST["score"];
 
         // Prepare and execute the SQL statement to insert the score into the database
-        $sql = "INSERT INTO leaderboard (user_id, score) VALUES (?, ?)";
+        $sql = "INSERT INTO scores (user_id, score) VALUES (?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ii", $userId, $score); // "ii" indicates integer parameters
         $stmt->execute();

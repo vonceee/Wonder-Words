@@ -79,10 +79,10 @@
                         include_once "database.php";
         
                         // Write the SQL query to select the top 10 highest scores with user's First_Name
-                        $sql = "SELECT u.username, l.score 
-                                FROM leaderboard l
-                                INNER JOIN user u ON l.user_id = u.id
-                                ORDER BY l.score DESC, u.username ASC LIMIT 10";
+                        $sql = "SELECT u.username, s.score 
+                                FROM scores s
+                                INNER JOIN user u ON s.user_id = u.id
+                                ORDER BY s.score DESC, u.username ASC LIMIT 10";
         
                         // Prepare and execute the query
                         $stmt = $conn->prepare($sql);

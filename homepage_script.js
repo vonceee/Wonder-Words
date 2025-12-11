@@ -1,9 +1,35 @@
+	/* --buttonPress-- */
+	function playAudioById() {
+		let audio = document.getElementById("buttonPress");
+
+		if (audio) {
+			audio.currentTime =  0;
+			audio.volume =  0.5;
+			audio.play();
+		} else {
+			console.error(`Audio element with ID not found.`);
+		}
+	}
+	/* --audio--! */
+	
+	function toggleMusic() {
+	  playAudioById();
+	  var audioElement = document.getElementById("gameMusic");
+	  if (audioElement.paused) {
+		audioElement.play();
+	  } else {
+		audioElement.pause();
+	  }
+	}
+
 	/* !--playButton-- */
 	document.addEventListener('DOMContentLoaded', function() {
 		var playButton = document.getElementById('playBtn');
 		playButton.addEventListener('click', function() {
 			playAudioById();
-			window.location.href = 'game.php';
+			setTimeout(function() {
+				window.location.href = 'game.php';
+			}, 100);
 		});
 	});
 	/* --playButton--! */
@@ -101,6 +127,7 @@
 		logoutModal.style.display = "none";
 		document.getElementById('modalOverlay').style.display = "none";
 	}
+
 	
 	function toggleMusic() {
 	  playAudioById();
@@ -111,17 +138,15 @@
 		audioElement.pause();
 	  }
 	}
-	
-	/* --buttonPress-- */
-	function playAudioById() {
-		let audio = document.getElementById("buttonPress");
 
-		if (audio) {
-			audio.currentTime =  0;
-			audio.volume =  0.5;
-			audio.play();
-		} else {
-			console.error(`Audio element with ID not found.`);
-		}
-	}
-	/* --audio--! */
+	/* !--playButton-- */
+	document.addEventListener('DOMContentLoaded', function() {
+		var playButton = document.getElementById('playBtn');
+		playButton.addEventListener('click', function() {
+			playAudioById();
+			setTimeout(function() {
+				window.location.href = 'game.php';
+			}, 100);
+		});
+	});
+	/* --playButton--! */

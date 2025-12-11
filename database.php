@@ -1,7 +1,7 @@
 <?php
     $hostName = "localhost";
     $dbUser = "root";
-    $dbPassword = "";
+    $dbPassword = "root";
     $dbName = "sibucao_log_register";
     $conn = mysqli_connect($hostName, $dbUser, $dbPassword, $dbName);
     if (!$conn) {
